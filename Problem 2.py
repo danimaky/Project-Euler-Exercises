@@ -3,3 +3,12 @@
 # 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
 # By considering the terms in the Fibonacci sequence whose values do not exceed four million,
 # find the sum of the even-valued terms.
+
+list = [1]
+counter = 2
+i = 1
+while counter < 4000000:
+    list.append(counter)
+    counter += list[i-1]
+    i += 1
+print(sum([n for n in list if n % 2 == 0]))
