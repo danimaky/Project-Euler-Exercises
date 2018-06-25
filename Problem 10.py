@@ -5,9 +5,8 @@ for i in range(2, 2000000):
     prime = True
     for number in primes:
         if i % number == 0:
-                prime = False
-                break
+            prime = False
+            break
     if prime:
         primes.append(i)
-        print(i)
 print(sum(primes))
