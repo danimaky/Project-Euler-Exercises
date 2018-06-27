@@ -1,3 +1,59 @@
+from pprint import pprint
+
+
+def productx(data, x, y):
+    bigproduct = 0
+    if y + 3 < 20:
+        product = 1
+        for i in range(4):
+            product *= data[x][y+i]
+        if product > bigproduct:
+            bigproduct = product
+    if y - 3 >= 0:
+        product = 1
+        for i in range(4):
+            product *= data[x][y-i]
+        if product > bigproduct:
+            bigproduct = product
+    if x + 3 < 20:
+        product = 1
+        for i in range(4):
+            product *= data[x+i][y]
+        if product > bigproduct:
+            bigproduct = product
+    if x - 3 >= 0:
+        product = 1
+        for i in range(4):
+            product *= data[x-i][y]
+        if product > bigproduct:
+            bigproduct = product
+    if x - 3 >= 0 and y+3 < 20:
+        product = 1
+        for i in range(4):
+            product *= data[x - i][y + i]
+        if product > bigproduct:
+            bigproduct = product
+    if x - 3 >= 0 and y - 3 >= 0:
+        product = 1
+        for i in range(4):
+            product *= data[x - i][y - i]
+        if product > bigproduct:
+            bigproduct = product
+    if x + 3 < 20 and y - 3 >= 0:
+        product = 1
+        for i in range(4):
+            product *= data[x + i][y - i]
+        if product > bigproduct:
+            bigproduct = product
+    if x + 3 < 20 and y + 3 < 20:
+        product = 1
+        for i in range(4):
+            product *= data[x + i][y + i]
+        if product > bigproduct:
+            bigproduct = product
+    return bigproduct
+
+
 data = (("""08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
@@ -18,35 +74,18 @@ data = (("""08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48""").replace('\n', '')).replace(' ', '')
-lista = []
+table = []
 for row in range(20):
-    lista.append([])
+    table.append([])
     i = 0
     while i < 40:
-        lista[row].append(int(data[0] + data[1]))
+        table[row].append(int(data[0] + data[1]))
         data = data[2::]
         i += 2
-higher = 0
+bigger = 0
 for row in range(20):
-    for column in range(17):
-        product = 1
-        for i in range(4):
-            product *= lista[row][column + i]
-        if product > higher:
-            higher = product
-for column in range(20):
-    for row in range(17):
-        product = 1
-        for i in range(4):
-            product *= lista[row+i][column]
-        if product > higher:
-            higher = product
-for column in range(20):
-    for row in range(20):
-        product = 1
-        for i in range(4):
-            product *= lista[row+i][column+i]
-        if product > higher:
-            higher = product
-
-print(higher)
+    for column in range(20):
+        product = productx(table, row, column)
+        if bigger < product:
+            bigger = product
+print(bigger)
