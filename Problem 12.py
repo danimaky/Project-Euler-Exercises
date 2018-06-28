@@ -12,3 +12,4 @@ while True:
         break
     i += 1
 print(triangulenum)
+# Another way to get the number's multiples len(list(map(lambda x: x, filter(lambda x: number % x == 0, range(1, number+1)))))
